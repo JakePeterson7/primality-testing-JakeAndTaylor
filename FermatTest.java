@@ -9,8 +9,13 @@ public class FermatTest{
         int numBits = 512;
         BigInteger p = new BigInteger(numBits, rnd); // random BigInteger of bit length numBits
         BigInteger prime = BigInteger.probablePrime(numBits, rnd); // random prime of bit length numBits
-        
+
+        System.out.println("Big ints to check");
         printBigInt(p);
+        printBigInt(prime);
+
+        System.out.println(testPrimality(p, s));
+        System.out.println(testPrimality(prime, s));
 
     }
     public static void printBigInt(BigInteger x){
@@ -27,7 +32,7 @@ public class FermatTest{
             if(checkComposite(a, n)){
                 prime = false;
             }
-            s++;
+            counter++;
         }
         return prime;
     }
@@ -41,7 +46,7 @@ public class FermatTest{
         }
         return composite;
     }
-    // Stub
+
     private static BigInteger pickRandomInRange(BigInteger p) {
         //find range
         BigInteger two = new BigInteger("2");
