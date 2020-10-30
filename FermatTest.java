@@ -36,14 +36,23 @@ public class FermatTest{
         boolean composite = true;
         BigInteger one = new BigInteger("1");
         BigInteger diff = n.subtract(one);
-        if(a.modPow(diff, n).equals(1) ){
+        if(a.modPow(diff, n).equals(one)){
             composite = false;
         }
         return composite;
     }
     // Stub
     private static BigInteger pickRandomInRange(BigInteger p) {
-        return new BigInteger(512, new Random());
+        //find range
+        BigInteger two = new BigInteger("2");
+        BigInteger range = p.subtract(two);
+        // create RNG and find bit length of the range
+        Random randNum = new Random();
+        int length = range.bitLength();
+        //construct result using the bit length of the range and the RNG.
+        BigInteger result = new BigInteger(length, randNum);
+
+        return result;
     }
 
 }
