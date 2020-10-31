@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class FermatTest {
     public static void main(String[] args) {
-        int s = 3; // security parameter
+        int s = 10; // security parameter
         // create random BigInteger of 512 bits
         Random rnd = new Random();
         int numBits = 512;
@@ -86,7 +86,7 @@ public class FermatTest {
         boolean prime = true;
         int counter = 0; // counter for numbers that we've already tried.
 
-        while (counter <= s) {
+        while (counter < s && prime == true) {
             BigInteger a = pickRandomInRange(n);
             // System.out.print("a: ");
             //printBigInt(a);
@@ -97,6 +97,7 @@ public class FermatTest {
             }
             counter++;
         }
+        System.out.println("This was tested " + counter + " times.");
         return prime;
     }
 
