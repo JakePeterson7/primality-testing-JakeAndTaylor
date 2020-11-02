@@ -1,8 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Random;
+import java.io.File;
 
 public class FermatTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int s = 10; // security parameter
         // create random BigInteger of 512 bits
         Random rnd = new Random();
@@ -15,18 +18,18 @@ public class FermatTest {
         // 512 bits
         BigInteger notPrime = new BigInteger(numBits, rnd); // random BigInteger of bit length numBits
         notPrime.multiply(BigInteger.TWO);                  // multiply by two to make sure its not prime.
-        BigInteger notPrimeB = new BigInteger(numBits, rnd); 
-        notPrimeB.multiply(BigInteger.TWO);                  
+        BigInteger notPrimeB = new BigInteger(numBits, rnd);
+        notPrimeB.multiply(BigInteger.TWO);
         BigInteger prime = BigInteger.probablePrime(numBits, rnd); // random prime of bit length numBits
-        BigInteger primeB = BigInteger.probablePrime(numBits, rnd); 
+        BigInteger primeB = BigInteger.probablePrime(numBits, rnd);
 
         // 1024 bits
         BigInteger notPrime2 = new BigInteger(numBits2, rnd); // random BigInteger of bit length numBits2
         notPrime.multiply(BigInteger.TWO);                  // multiply by two to make sure its not prime.
-        BigInteger notPrimeC = new BigInteger(numBits2, rnd); 
-        notPrimeC.multiply(BigInteger.TWO);                  
+        BigInteger notPrimeC = new BigInteger(numBits2, rnd);
+        notPrimeC.multiply(BigInteger.TWO);
         BigInteger prime2 = BigInteger.probablePrime(numBits2, rnd); // random prime of bit length numBits2
-        BigInteger primeC = BigInteger.probablePrime(numBits2, rnd); 
+        BigInteger primeC = BigInteger.probablePrime(numBits2, rnd);
 
 
         // Start testing
@@ -74,7 +77,46 @@ public class FermatTest {
 
         System.out.println();
 
-    }
+        //Finding Large Primes
+        //512 bits
+        BigInteger findingPrime = new BigInteger(numBits, rnd);
+        int i = 0;
+        while (invertedTestPrimality(findingPrime, s)){
+            findingPrime = new BigInteger(numBits, rnd);
+            i++;
+        } System.out.println(findingPrime + " is the found prime!");
+        System.out.println(testPrimality(findingPrime, s));
+        System.out.println(i + " candidates were tried.");
+
+        BigInteger findingPrime2 = new BigInteger(numBits, rnd);
+        int j = 0;
+        while (invertedTestPrimality(findingPrime2, s)){
+            findingPrime2 = new BigInteger(numBits, rnd);
+            j++;
+        } System.out.println(findingPrime2 + " is the found prime!");
+        System.out.println(testPrimality(findingPrime2, s));
+        System.out.println(j + " candidates were tried.");
+
+        //1024 bits
+        BigInteger findingPrime3 = new BigInteger(numBits2, rnd);
+        int k = 0;
+        while (invertedTestPrimality(findingPrime3, s)){
+            findingPrime3 = new BigInteger(numBits, rnd);
+            k++;
+        } System.out.println(findingPrime3 + " is the found prime!");
+        System.out.println(testPrimality(findingPrime3, s));
+        System.out.println(k + " candidates were tried.");
+
+        BigInteger findingPrime4 = new BigInteger(numBits2, rnd);
+        int l = 0;
+        while (invertedTestPrimality(findingPrime4, s)){
+            findingPrime4 = new BigInteger(numBits, rnd);
+            l++;
+        } System.out.println(findingPrime4 + " is the found prime!");
+        System.out.println(testPrimality(findingPrime4, s));
+        System.out.println(l + " candidates were tried.");
+        }
+
 
     public static void printBigInt(BigInteger x) {
         System.out.println(x.toString());
@@ -126,4 +168,25 @@ public class FermatTest {
         return result;
     }
 
+    private static boolean invertedTestPrimality(BigInteger n, int s) throws IOException {
+        boolean prime = true;
+        int counter = 0; // counter for numbers that we've already tried.
+        FileWriter file = new FileWriter("results.txt");
+
+        while (counter < s && prime) {
+            BigInteger a = pickRandomInRange(n);
+            // System.out.print("a: ");
+            //printBigInt(a);
+            if (checkComposite(a, n)) {
+            // System.out.print("a: ");
+            // printBigInt(a);
+            prime = false;
+            file.write(a + " the number of candidates a for each random candidate."); //This really clutters the output.
+        }
+        counter++;
+    }
+    file.write(counter + " the average number of operations per candidate a."); //This also clutters the output.
+    return !prime;
+
+}
 }
