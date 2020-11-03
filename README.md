@@ -4,7 +4,7 @@ The fermat primality test is being implemented in FermatTest.java.
 It is being tested in Tests.java, some of the output is being converted into scientific
 notation for readability.
 
-Finding large primes:
+Finding large primes conclusion:
 
 When looking for primes the amount of bits didn’t seem to matter as the number of candidates tried until a prime was found varied from 10’s to 100’s for both. Basically every time we rerun the test the amount of candidates changed with no noticeable pattern.
 
