@@ -13,66 +13,7 @@ public class FermatTest {
 
         Tests.primalityTests(s);
         Tests.carmichaelTests(s);
-
-        // Finding Large Primes
-        // 512 bits
-        FileWriter file = new FileWriter("results.txt"); // writes some results to a separate file and overwrites the
-                                                         // previous results.txt if one exists.
-        file.write("512 bits\n");
-        file.close();
-        file = new FileWriter("results.txt", true);
-        BigInteger findingPrime = new BigInteger(numBits, rnd);
-        int i = 0;
-        while (invertedTestPrimality(findingPrime, s)) {
-            findingPrime = new BigInteger(numBits, rnd);
-            i++;
-        }
-        System.out.println(findingPrime + " is the found prime!");
-        System.out.println(testPrimality(findingPrime, s));
-        System.out.println(i + " candidates were tried.");
-        file.write(findingPrime + " is the found prime!\n" + i + " candidates were tried.\n");
-        file.close();
-
-        BigInteger findingPrime2 = new BigInteger(numBits, rnd);
-        file = new FileWriter("results.txt", true);
-        int j = 0;
-        while (invertedTestPrimality(findingPrime2, s)) {
-            findingPrime2 = new BigInteger(numBits, rnd);
-            j++;
-        }
-        System.out.println(findingPrime2 + " is the found prime!");
-        System.out.println(testPrimality(findingPrime2, s));
-        System.out.println(j + " candidates were tried.");
-        file.write(findingPrime2 + " is the found prime!\n" + j + " candidates were tried.\n");
-        file.close();
-
-        // 1024 bits
-        file = new FileWriter("results.txt", true);
-        file.write("1024 bits\n");
-        BigInteger findingPrime3 = new BigInteger(numBits2, rnd);
-        int k = 0;
-        while (invertedTestPrimality(findingPrime3, s)) {
-            findingPrime3 = new BigInteger(numBits, rnd);
-            k++;
-        }
-        System.out.println(findingPrime3 + " is the found prime!");
-        System.out.println(testPrimality(findingPrime3, s));
-        System.out.println(k + " candidates were tried.");
-        file.write(findingPrime3 + " is the found prime!\n" + k + " candidates were tried.\n");
-        file.close();
-
-        BigInteger findingPrime4 = new BigInteger(numBits2, rnd);
-        file = new FileWriter("results.txt", true);
-        int l = 0;
-        while (invertedTestPrimality(findingPrime4, s)) {
-            findingPrime4 = new BigInteger(numBits, rnd);
-            l++;
-        }
-        System.out.println(findingPrime4 + " is the found prime!");
-        System.out.println(testPrimality(findingPrime4, s));
-        System.out.println(l + " candidates were tried.");
-        file.write(findingPrime4 + " is the found prime!\n" + l + " candidates were tried.\n");
-        file.close();
+        Tests.invertedPrimalityTesting(rnd, numBits, numBits2, s);
     }
 
     public static void printBigInt(BigInteger x) {
@@ -125,7 +66,7 @@ public class FermatTest {
         return result;
     }
 
-    private static boolean invertedTestPrimality(BigInteger n, int s) throws IOException {
+    static boolean invertedTestPrimality(BigInteger n, int s) throws IOException {
         boolean prime = true;
         int counter = 0; // counter for numbers that we've already tried.
         FileWriter file = new FileWriter("results.txt", true);
