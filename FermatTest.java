@@ -81,6 +81,8 @@ public class FermatTest {
         //512 bits
         FileWriter file = new FileWriter("results.txt"); //writes some results to a separate file and overwrites the previous results.txt if one exists.
         file.write("512 bits\n");
+        file.close();
+        file = new FileWriter("results.txt", true);
         BigInteger findingPrime = new BigInteger(numBits, rnd);
         int i = 0;
         while (invertedTestPrimality(findingPrime, s)){
@@ -201,7 +203,7 @@ public class FermatTest {
         }
         counter++;
     }
-    file.write(counter + " the number of candidates a for the random candidate.\n\n");
+    file.write(counter + " the number of candidates for a for the candidate " + n + "\n");
         file.close();
         return !prime;
 
