@@ -1,6 +1,11 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Random;
 
 public class Tests {
@@ -108,7 +113,7 @@ public class Tests {
 	        findingPrime = new BigInteger(numBits, rnd);
 	        i++;
 	    }
-	    System.out.println(findingPrime + " is the found prime!");
+	    System.out.println(formatBI(findingPrime) + " is the found prime!");
 	    System.out.println(FermatTest.testPrimality(findingPrime, s));
 	    System.out.println(i + " candidates were tried.");
 	    file.write(findingPrime + " is the found prime!\n" + i + " candidates were tried.\n");
@@ -120,7 +125,7 @@ public class Tests {
 	        findingPrime2 = new BigInteger(numBits, rnd);
 	        j++;
 	    }
-	    System.out.println(findingPrime2 + " is the found prime!");
+	    System.out.println(formatBI(findingPrime2) + " is the found prime!");
 	    System.out.println(FermatTest.testPrimality(findingPrime2, s));
 	    System.out.println(j + " candidates were tried.");
 	    file.write(findingPrime2 + " is the found prime!\n" + j + " candidates were tried.\n");
@@ -134,7 +139,7 @@ public class Tests {
 	        findingPrime3 = new BigInteger(numBits, rnd);
 	        k++;
 	    }
-	    System.out.println(findingPrime3 + " is the found prime!");
+	    System.out.println(formatBI(findingPrime3) + " is the found prime!");
 	    System.out.println(FermatTest.testPrimality(findingPrime3, s));
 	    System.out.println(k + " candidates were tried.");
 	    file.write(findingPrime3 + " is the found prime!\n" + k + " candidates were tried.\n");
@@ -147,11 +152,21 @@ public class Tests {
 	        findingPrime4 = new BigInteger(numBits, rnd);
 	        l++;
 	    }
-	    System.out.println(findingPrime4 + " is the found prime!");
+	    System.out.println(formatBI(findingPrime4) + " is the found prime!");
 	    System.out.println(FermatTest.testPrimality(findingPrime4, s));
 	    System.out.println(l + " candidates were tried.");
 	    file.write(findingPrime4 + " is the found prime!\n" + l + " candidates were tried.\n");
 	    file.close();
+	}
+	// I looked at https://en.it1352.com/article/f2577fb438194840a731ca61992394db.html
+	// to help format BigIntegers into scientific notation.
+	public static BigDecimal formatBI(BigInteger bi){
+		NumberFormat formatter = new DecimalFormat("0.######E0", DecimalFormatSymbols.getInstance(Locale.ROOT));
+		String str = formatter.format(bi);
+
+		BigDecimal result = new BigDecimal(str);
+
+		return result;
 	}
     
 }
