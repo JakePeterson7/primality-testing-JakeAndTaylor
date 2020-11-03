@@ -17,17 +17,13 @@ public class FermatTest {
 
     }
 
-    public static void printBigInt(BigInteger x) {
-        System.out.println(x.toString());
-    }
-
     // This primality test will check if n is prime or not.
     // Will return true if prime.
-    public static boolean testPrimality(BigInteger n, int s) {
+    static boolean testPrimality(BigInteger n, int s) {
         boolean prime = true;
         int counter = 0; // counter for numbers that we've already tried.
 
-        while (counter < s && prime == true) {
+        while (counter < s && prime) {
             BigInteger a = pickRandomInRange(n);
             // System.out.print("a: ");
             // printBigInt(a);
@@ -80,11 +76,10 @@ public class FermatTest {
                 // System.out.print("a: ");
                 // printBigInt(a);
                 prime = false;
-                file.write(a + " the number of candidates a for each random candidate.\n");
             }
             counter++;
         }
-        file.write(counter + " the average number of operations per candidate a.\n\n");
+        file.write(counter + " the number of candidates for a for the candidate " + n + "\n");
         file.close();
         return !prime;
 
