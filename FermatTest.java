@@ -198,11 +198,10 @@ public class FermatTest {
             // System.out.print("a: ");
             // printBigInt(a);
             prime = false;
-            file.write(a + " the number of candidates a for each random candidate.\n");
         }
         counter++;
     }
-    file.write(counter + " the average number of operations per candidate a.\n\n");
+    file.write(counter + " the number of candidates a for the random candidate.\n\n");
         file.close();
         return !prime;
 
