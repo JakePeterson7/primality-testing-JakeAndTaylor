@@ -14,6 +14,7 @@ public class FermatTest {
         Tests.primalityTests(s);
         Tests.carmichaelTests(s);
         Tests.invertedPrimalityTesting(rnd, numBits, numBits2, s);
+
     }
 
     public static void printBigInt(BigInteger x) {
