@@ -79,7 +79,7 @@ public class FermatTest {
 
         //Finding Large Primes
         //512 bits
-        FileWriter file = new FileWriter("results.txt"); //writes some results to a separate file.
+        FileWriter file = new FileWriter("results.txt"); //writes some results to a separate file and overwrites the previous results.txt if one exists.
         file.write("512 bits\n");
         BigInteger findingPrime = new BigInteger(numBits, rnd);
         int i = 0;
